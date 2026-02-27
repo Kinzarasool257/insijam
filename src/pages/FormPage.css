@@ -1,0 +1,273 @@
+/* Main Layout */
+/* Prevent Horizontal Scroll */
+* {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  width: 100%;
+  overflow-x: hidden;
+}
+
+.form-container {
+  overflow-x: hidden;
+  min-height: 100vh;
+  width: 100%;
+  background: url("/public/Images/insijam_background.png") no-repeat center;
+  background-size: cover;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  padding: 40px 20px;
+}
+
+/* Inner Wrapper */
+.form-wrapper {
+  max-width: 1200px;
+  width: 100%;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  gap: 60px;
+  align-items: center;
+}
+
+/* Main Heading */
+.form-left h1 {
+  font-family: "Montserrat", sans-serif;
+  font-size: 42px;
+  font-weight: 700;
+  color: #28384f;
+  margin-bottom: 15px;
+
+  white-space: nowrap;      /* stay on one line on desktop */
+}
+
+@media (max-width: 900px) {
+  .form-left h1 {
+    white-space: normal;   /* allow wrapping on mobile */
+    font-size: 34px;
+  }
+}
+
+/* Paragraph */
+.form-left p {
+  font-family: "Montserrat", sans-serif;
+  font-size: 15px;
+  color: #333;
+  margin-bottom: 30px;
+  line-height: 1.6;
+  white-space: nowrap; /* allow wrapping */
+}
+
+/* Form Box */
+.form-box {
+  max-width: 450px;
+}
+
+/* Input Wrapper */
+.form-group {
+  margin-bottom: 15px;
+}
+
+/* Inputs */
+.form-group input,
+.form-group select {
+  width: 100%;
+  padding: 12px 14px;
+  border-radius: 6px;
+  border: 1px solid #28384F;
+  font-size: 14px;
+  font-family: "Montserrat", sans-serif;
+  outline: none;
+}
+
+.form-group input:focus,
+.form-group select:focus {
+  border-color: #4dbfb4;
+}
+
+/* Placeholder text styling */
+.form-group input::placeholder {
+  color: #333; /* same as input text */
+  opacity: 1;
+  font-family: "Montserrat", sans-serif;
+  font-size: 14px;
+}
+
+/* Readonly */
+.readonly {
+   background: #fff;
+}
+
+/* Phone wrapper */
+.phone-wrapper {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+/* Country code + flag box styled like input */
+.phone-code-box {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 4px;
+
+  padding: 12px 14px;
+  background: #fff;
+  border: 1px solid #28384F;
+  border-radius: 6px;
+  font-size: 14px;
+  color: #333;
+  font-family: "Montserrat", sans-serif;
+
+  height: 48px;
+  min-width: 80px;
+  box-sizing: border-box;
+}
+
+/* Flag icon */
+.flag-icon {
+  width: 20px;
+  height: 14px;
+}
+
+/* Phone input box */
+.phone-input {
+  flex: 1;
+  padding: 12px 14px;
+  border-radius: 6px;
+  border: 1px solid #28384F;
+  height: 48px;
+  box-sizing: border-box;
+}
+
+/* Button */
+.submit-btn {
+  width: 100%;
+  padding: 14px;
+  background: #4dbfb4;
+  border: none;
+  border-radius: 6px;
+  font-size: 15px;
+  font-weight: 600;
+  color: #fff;
+  cursor: pointer;
+  margin-top: 10px;
+  transition: background 0.2s ease;
+}
+
+.submit-btn:hover {
+  background: #3aa99e;
+}
+
+/* Error */
+.error {
+  font-size: 12px;
+  color: red;
+  margin-top: 4px;
+  font-family: "Montserrat", sans-serif;
+}
+
+/* Right Image */
+.form-right img {
+  width: 115%;           /* increased size */
+  max-width: 700px;      /* bigger max width */
+  height: auto;
+  display: block;
+  margin: 120px auto 0;  /* moved down more */
+  transform: translateY(20px);
+}
+
+/* Responsive adjustments */
+@media (max-width: 900px) {
+  .form-wrapper {
+    grid-template-columns: 1fr;
+    text-align: center;
+  }
+
+  .form-box {
+    margin: auto;
+  }
+
+  .form-right img {
+    width: 90%;
+    max-width: 100%;
+    margin: 20px auto 0;
+    transform: translateY(10px);
+  }
+}
+@media (min-width: 601px) and (max-width: 1024px) {
+
+  .form-wrapper {
+    grid-template-columns: 1fr;
+    gap: 40px;
+  }
+
+  .form-left h1 {
+    font-size: 34px;
+    white-space: normal;
+  }
+
+  .form-left p {
+    white-space: normal;
+  }
+
+  .form-right img {
+    width: 90%;
+    max-width: 600px;
+    margin: 40px auto 0;
+    transform: none;
+  }
+
+}
+@media (max-width: 600px) {
+
+  .form-container {
+    padding: 30px 16px;
+  }
+
+  .form-wrapper {
+    grid-template-columns: 1fr;
+    gap: 30px;
+  }
+
+  .form-left h1 {
+    font-size: 28px;
+    white-space: normal; /* allow wrapping */
+    line-height: 1.3;
+  }
+
+  .form-left p {
+    white-space: normal; /* allow wrapping */
+    font-size: 14px;
+  }
+
+  .form-box {
+    max-width: 100%;
+  }
+
+  .form-right img {
+    width: 85%;
+    max-width: 100%;
+    margin: 20px auto 0;
+    transform: none;
+  }
+
+  .phone-wrapper {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .phone-code-box {
+    width: 100%;
+  }
+
+  .phone-input {
+    width: 100%;
+  }
+
+}
