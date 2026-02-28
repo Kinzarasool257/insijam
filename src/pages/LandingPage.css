@@ -14,7 +14,7 @@ html, body {
 .landing-container {
   height: 100vh;
   width: 100%;
-  background: url("/public/Images/insijam_background.png") no-repeat center;
+  background: url("/public/images/insijam_background.png") no-repeat center;
   background-size: cover;
 
   display: flex;
