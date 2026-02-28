@@ -90,7 +90,7 @@ const ThankYou = () => {
         }}
       >
         <img
-          src="/images/qr_code.png"
+          src="public/images/qr_code.png"
           alt="QR Code"
           style={{
             width: "clamp(180px, 40vw, 254px)",
