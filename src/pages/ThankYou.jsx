@@ -18,7 +18,7 @@ const ThankYou = () => {
   style={{
     height: "100vh",              // fixed height instead of minHeight
     overflow: "hidden",           // prevent vertical scroll
-    backgroundImage: "url('public/images/insijam_background.png')",
+    backgroundImage: "url('/images/insijam_background.png')",
     backgroundSize: "cover",
     backgroundPosition: "center",
     backgroundRepeat: "no-repeat",
@@ -90,7 +90,7 @@ const ThankYou = () => {
         }}
       >
         <img
-          src="public/images/qr_code.png"
+          src="/images/qr_code.png"
           alt="QR Code"
           style={{
             width: "clamp(180px, 40vw, 254px)",
