@@ -2,30 +2,37 @@ import { useEffect } from "react";
 import { trackPageView, trackEvent } from "../analytics/ga";
 
 const ThankYou = () => {
-  useEffect(() => {
-    trackPageView("/thank-you");
-    trackEvent("Reached Thank You Page");
-  }, []);
+ useEffect(() => {
+  trackPageView("/thank-you");
+  trackEvent("Reached Thank You Page");
+
+  document.body.style.overflow = "hidden";
+
+  return () => {
+    document.body.style.overflow = "auto";
+  };
+}, []);
 
   return (
-    <div
-      style={{
-        minHeight: "100vh",
-        backgroundImage: "url('/images/insijam_background.png')",
-        backgroundSize: "cover",
-        backgroundPosition: "center",
-        backgroundRepeat: "no-repeat",
-        display: "flex",
-        flexDirection: "column",
-        alignItems: "center",
-        justifyContent: "center",
-        textAlign: "center",
-        padding: "5vw 5%",
-        fontFamily: "'Montserrat', sans-serif",
-        lineHeight: "1.5",
-        letterSpacing: 0,
-      }}
-    >
+   <div
+  style={{
+    height: "100vh",              // fixed height instead of minHeight
+    overflow: "hidden",           // prevent vertical scroll
+    backgroundImage: "url('/images/insijam_background.png')",
+    backgroundSize: "cover",
+    backgroundPosition: "center",
+    backgroundRepeat: "no-repeat",
+    display: "flex",
+    flexDirection: "column",
+    alignItems: "center",
+    justifyContent: "center",
+    textAlign: "center",
+    padding: "3vw 5%",            // slightly reduced padding
+    fontFamily: "'Montserrat', sans-serif",
+    lineHeight: "1.5",
+    letterSpacing: 0,
+  }}
+>
       <h1
         style={{
           fontSize: "clamp(28px, 6vw, 50px)", // responsive font size
