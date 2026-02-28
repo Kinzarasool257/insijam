@@ -18,7 +18,7 @@ const ThankYou = () => {
   style={{
     height: "100vh",              // fixed height instead of minHeight
     overflow: "hidden",           // prevent vertical scroll
-    backgroundImage: "url('/images/insijam_background.png')",
+    backgroundImage: "url('public/images/insijam_background.png')",
     backgroundSize: "cover",
     backgroundPosition: "center",
     backgroundRepeat: "no-repeat",
