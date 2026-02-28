@@ -39,7 +39,7 @@ const LandingPage = () => {
             className="card"
             onClick={() => handleSelect("Car")}
           >
-            <img src="/Images/Car.png" alt="Auto" />
+            <img src="/images/Car.png" alt="Auto" />
             <p>Auto</p>
           </div>
 
@@ -47,7 +47,7 @@ const LandingPage = () => {
             className="card"
             onClick={() => handleSelect("Health")}
           >
-            <img src="/Images/Health.png" alt="Health" />
+            <img src="/images/Health.png" alt="Health" />
             <p>Health</p>
           </div>
 
@@ -55,7 +55,7 @@ const LandingPage = () => {
             className="card"
             onClick={() => handleSelect("Travel")}
           >
-            <img src="/Images/Travel.png" alt="Travel" />
+            <img src="/images/Travel.png" alt="Travel" />
             <p>Travel</p>
           </div>
 

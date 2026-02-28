@@ -135,7 +135,7 @@ const FormPage = () => {
     {/* Country Code */}
     <div className="phone-code-box">
       <img
-        src="/Images/Flag.png"
+        src="/images/Flag.png"
         alt="PK"
         className="flag-icon"
       />
@@ -186,7 +186,7 @@ const FormPage = () => {
         {/* RIGHT SIDE IMAGE */}
         <div className="form-right">
           <img
-            src="/Images/formimage.png"
+            src="images/formimage.png"
             alt="Insurance Illustration"
           />
         </div>
