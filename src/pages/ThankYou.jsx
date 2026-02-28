@@ -34,7 +34,7 @@ const ThankYou = () => {
 
       <div className="qr-wrapper">
         <img
-          src="/images/qr_code.png"
+          src="/images/Qrcode.png"
           alt="QR Code"
           className="qr-image"
         />
