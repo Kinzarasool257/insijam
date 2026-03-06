@@ -20,7 +20,7 @@ const LandingPage = () => {
   return (
     <div className="landing-container">
       <div className="content">
-
+        <div className="logo"><img src="/images/logohome.png" alt="logo" /></div>
         {/* Title */}
         <h1 className="title">
           Find the Best Takaful Coverage Instantly

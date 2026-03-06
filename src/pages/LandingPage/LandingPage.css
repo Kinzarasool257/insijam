@@ -1,18 +1,20 @@
 @import url("https://fonts.googleapis.com/css2?family=Inter:wght@300;400&family=Montserrat:wght@400;700&family=Open+Sans:wght@600&display=swap");
 
-/* Hide scrollbar for all pages */
+/* Hide scrollbar */
 ::-webkit-scrollbar {
   display: none;
 }
 
 html, body {
-  scrollbar-width: none;  /* Firefox */
-  -ms-overflow-style: none; /* IE */
+  margin: 0;
+  padding: 0;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
 }
 
-/* Main Container */
+/* MAIN CONTAINER */
 .landing-container {
-  height: 100vh;
+  min-height: 100vh; /* FIX: prevents cropping */
   width: 100%;
   background: url("/public/images/insijam_background.png") no-repeat center;
   background-size: cover;
@@ -20,10 +22,12 @@ html, body {
   display: flex;
   justify-content: center;
   align-items: center;
-  padding: 0 20px; /* desktop padding remains */
+
+  padding: 40px 20px; /* spacing top/bottom */
+  overflow-y: auto;
 }
 
-/* Main Content Wrapper */
+/* CONTENT */
 .content {
   width: 100%;
   max-width: 1000px;
@@ -31,36 +35,49 @@ html, body {
   padding: 0 20px;
 }
 
-/* Title */
-.title {
-  font-weight: 700;
-  font-size: 48px; /* desktop size */
-  margin: 0;
-  line-height: 1.2;
-  color: #28384f;
-  white-space: nowrap; /* keep desktop perfect */
+
+/* LOGO */
+.logo {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 20px;
 }
 
-/* Subtitle */
+.logo img {
+  width: clamp(150px, 20vw, 260px);
+  max-width: 100%;
+  height: auto;
+  object-fit: contain;
+}
+
+/* TITLE */
+.title {
+  font-weight: 700;
+  font-size: clamp(20px, 4vw, 30px); /* responsive heading */
+  line-height: 1.2;
+  color: #28384f;
+  margin: 0;
+}
+
+/* SUBTITLE */
 .subtitle {
   font-weight: 400;
-  font-size: 16px; /* desktop size */
+  font-size: clamp(12px, 1.5vw, 16px);
   margin: 15px 0 45px 0;
   line-height: 1.5;
   color: #000;
 }
 
-/* Cards Wrapper */
+/* CARDS */
 .card-container {
   display: flex;
   justify-content: center;
   align-items: center;
   gap: 40px;
-  margin-bottom: 110px;
+  margin-bottom: 90px;
   flex-wrap: wrap;
 }
 
-/* Card */
 .card {
   width: 153px;
   height: 152px;
@@ -68,10 +85,12 @@ html, body {
   border-radius: 12px;
   border: 1.2px solid #000;
   box-shadow: 0 6px 0 #2d3748;
+
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
+
   cursor: pointer;
   transition: transform 0.2s ease, box-shadow 0.2s ease;
 }
@@ -81,78 +100,65 @@ html, body {
   box-shadow: 0 9px 0 #2d3748;
 }
 
-/* Card Image */
 .card img {
-  width: 100%;
+  width: 75%;
   height: auto;
   object-fit: contain;
-  display: block;
-  margin-top: -10px;
+  margin-bottom: -10%;
 }
 
-/* Card Text */
 .card p {
   font-family: "Open Sans", sans-serif;
   font-weight: 600;
   font-size: 19px;
-  line-height: normal;
-  letter-spacing: -0.5px;
   color: #28384f;
-  margin: -40px 0 0 0;
+  margin-top: 5px;
 }
 
-/* Disclaimer Links */
+/* DISCLAIMER LINKS */
 .disclaimer {
   display: flex;
   justify-content: center;
   align-items: center;
-  gap: 0px;
+  flex-wrap: wrap;
+  gap: 5px;
+
   font-family: "Inter", sans-serif;
   font-size: 10px;
-  font-weight: 400;
   margin-bottom: 10px;
 }
 
 .disclaimer span {
   text-decoration: underline;
   cursor: pointer;
-  position: relative;
 }
 
-/* Pipe Separator */
 .disclaimer span:not(:last-child)::after {
   content: "|";
-  margin-left: 4px;
-  margin-right: 4px;
+  margin: 0 6px;
   text-decoration: none;
 }
 
-/* Disclaimer Text */
+/* DISCLAIMER TEXT */
 .disclaimer-text {
   max-width: 660px;
-  margin: 25px auto;
+  margin: 20px auto;
+
   font-family: "Inter", sans-serif;
   font-weight: 300;
   font-size: 10px;
-  line-height: 1.3;
+  line-height: 1.4;
   letter-spacing: 0.3px;
   text-align: left;
 }
 
-/* ------------------- RESPONSIVE STYLES ------------------- */
-/* Only apply to tablets and smaller screens */
+/* ---------------- TABLET ---------------- */
+
 @media (max-width: 1024px) {
-   .title {
-    font-size: 36px;     /* smaller font on tablet */
-    white-space: normal; /* allow text to wrap */
-  }
-  .subtitle {
-    font-size: 14px;
-  }
 
   .card-container {
     gap: 30px;
-    margin-bottom: 80px;
+    margin-bottom: 70px;
   }
 
   .card {
@@ -162,14 +168,12 @@ html, body {
 
   .card p {
     font-size: 16px;
-    margin-top: -30px;
   }
 }
 
+/* ---------------- MOBILE ---------------- */
+
 @media (max-width: 768px) {
-  .subtitle {
-    font-size: 13px;
-  }
 
   .card-container {
     gap: 20px;
@@ -183,24 +187,15 @@ html, body {
 
   .card p {
     font-size: 15px;
-    margin-top: -25px;
   }
 }
 
-@media (max-width: 480px) {
-  .title {
-    font-size: 32px;
-    white-space: normal; /* allow wrapping */
-  }
+/* ---------------- SMALL PHONES ---------------- */
 
-  .subtitle {
-    font-size: 12px;
-    margin-bottom: 30px;
-  }
+@media (max-width: 480px) {
 
   .card-container {
     gap: 15px;
-    margin-bottom: 40px;
   }
 
   .card {
@@ -210,56 +205,25 @@ html, body {
 
   .card p {
     font-size: 14px;
-    margin-top: -20px;
   }
 
   .disclaimer-text {
     font-size: 9px;
-    max-width: 90%;
-  }
-}
-/* iPhone SE and Samsung Galaxy X8+ responsive fix */
-@media (max-width: 412px) {
-  /* Make container scrollable if content overflows */
-  .landing-container {
-    height: auto; /* let it expand if needed */
-    min-height: 100vh; /* still at least full screen */
-    padding-top: 50px;
-    padding-bottom: 40px; /* give bottom breathing space */
-    overflow-y: auto; /* enable vertical scroll if needed */
-    display: flex;
-    flex-direction: column;
-    justify-content: flex-start; /* don't stretch content to top/bottom */
-    align-items: center;
-  }
-
-  /* Center the main content vertically if possible */
-  .content {
-    padding: 0 10px;
-    text-align: center;
     max-width: 95%;
   }
+}
 
-  /* Adjust title spacing and size */
-  .title {
-    font-size: 28px; /* slightly smaller to fit */
-    margin-top: 20px;
-    line-height: 1.2;
-    white-space: normal; /* allow wrapping */
+/* ---------------- VERY SMALL DEVICES ---------------- */
+
+@media (max-width: 412px) {
+
+  .landing-container {
+    padding-top: 50px;
+    padding-bottom: 40px;
   }
 
-  /* Subtitle adjustments */
-  .subtitle {
-    font-size: 12px;
-    margin: 10px 0 30px 0;
-    line-height: 1.4;
-  }
-
-  /* Cards adjustments */
   .card-container {
-    gap: 10px;
-    margin-bottom: 30px;
-    flex-wrap: wrap;
+    gap: 12px;
   }
 
   .card {
@@ -269,13 +233,11 @@ html, body {
 
   .card p {
     font-size: 12px;
-    margin-top: -15px;
   }
 
-  /* Disclaimer adjustments */
   .disclaimer-text {
     font-size: 8px;
-    max-width: 90%;
-    margin-bottom: 10px;
   }
+  
+  
 }
