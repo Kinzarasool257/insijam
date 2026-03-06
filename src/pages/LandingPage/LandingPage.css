@@ -33,7 +33,6 @@ html, body {
 
 /* Title */
 .title {
-  font-family: "Montserrat", sans-serif;
   font-weight: 700;
   font-size: 48px; /* desktop size */
   margin: 0;
@@ -44,7 +43,6 @@ html, body {
 
 /* Subtitle */
 .subtitle {
-  font-family: "Montserrat", sans-serif;
   font-weight: 400;
   font-size: 16px; /* desktop size */
   margin: 15px 0 45px 0;
@@ -218,5 +216,66 @@ html, body {
   .disclaimer-text {
     font-size: 9px;
     max-width: 90%;
+  }
+}
+/* iPhone SE and Samsung Galaxy X8+ responsive fix */
+@media (max-width: 412px) {
+  /* Make container scrollable if content overflows */
+  .landing-container {
+    height: auto; /* let it expand if needed */
+    min-height: 100vh; /* still at least full screen */
+    padding-top: 50px;
+    padding-bottom: 40px; /* give bottom breathing space */
+    overflow-y: auto; /* enable vertical scroll if needed */
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start; /* don't stretch content to top/bottom */
+    align-items: center;
+  }
+
+  /* Center the main content vertically if possible */
+  .content {
+    padding: 0 10px;
+    text-align: center;
+    max-width: 95%;
+  }
+
+  /* Adjust title spacing and size */
+  .title {
+    font-size: 28px; /* slightly smaller to fit */
+    margin-top: 20px;
+    line-height: 1.2;
+    white-space: normal; /* allow wrapping */
+  }
+
+  /* Subtitle adjustments */
+  .subtitle {
+    font-size: 12px;
+    margin: 10px 0 30px 0;
+    line-height: 1.4;
+  }
+
+  /* Cards adjustments */
+  .card-container {
+    gap: 10px;
+    margin-bottom: 30px;
+    flex-wrap: wrap;
+  }
+
+  .card {
+    width: 90px;
+    height: 90px;
+  }
+
+  .card p {
+    font-size: 12px;
+    margin-top: -15px;
+  }
+
+  /* Disclaimer adjustments */
+  .disclaimer-text {
+    font-size: 8px;
+    max-width: 90%;
+    margin-bottom: 10px;
   }
 }

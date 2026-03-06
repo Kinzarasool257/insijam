@@ -1,12 +1,16 @@
 import { useLocation, useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
-import { trackPageView, trackEvent } from "../analytics/ga";
+import { trackPageView, trackEvent } from "../../analytics/ga";
+import DatePicker from "react-datepicker";
+import "react-datepicker/dist/react-datepicker.css";
 
 import "./FormPage.css";
 
 const FormPage = () => {
   const location = useLocation();
   const navigate = useNavigate();
+
+const [selectedDate, setSelectedDate] = useState(null);
 
   const vehicleType = location.state?.vehicle || "";
 
@@ -161,21 +165,35 @@ const FormPage = () => {
 </div>
 
               {/* Time */}
-              <div className="form-group">
-                <input
-                  type="datetime-local"
-                  name="bestTime"
-                  value={formData.bestTime}
-                  onChange={handleChange}
-                />
-                {errors.bestTime && (
-                  <div className="error">{errors.bestTime}</div>
-                )}
-              </div>
+             <div className="form-group">
+
+  <DatePicker
+    selected={selectedDate}
+    onChange={(date) => {
+      setSelectedDate(date);
+
+      setFormData({
+        ...formData,
+        bestTime: date
+      });
+    }}
+
+    showTimeSelect
+    timeIntervals={15}
+    dateFormat="MMMM d, yyyy h:mm aa"
+    placeholderText="Choose your time"
+    className="datepicker-input"
+  />
+
+  {errors.bestTime && (
+    <div className="error">{errors.bestTime}</div>
+  )}
+
+</div>
 
               {/* Button */}
               <button type="submit" className="submit-btn">
-                Get My Takaful Quotes
+                Get a call back
               </button>
 
             </form>

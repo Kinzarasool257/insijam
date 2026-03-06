@@ -2,14 +2,18 @@
 /* Prevent Horizontal Scroll */
 * {
   box-sizing: border-box;
+  margin: 0;
+  padding: 0;
 }
 
 html,
 body {
   width: 100%;
   overflow-x: hidden;
+  font-family: 'Arial', sans-serif;
 }
 
+/* Container */
 .form-container {
   overflow-x: hidden;
   min-height: 100vh;
@@ -31,40 +35,30 @@ body {
   display: grid;
   grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
   gap: 60px;
-  align-items: center;
+  align-items: start;
 }
 
 /* Main Heading */
 .form-left h1 {
-  font-family: "Montserrat", sans-serif;
   font-size: 42px;
   font-weight: 700;
   color: #28384f;
   margin-bottom: 15px;
-
-  white-space: nowrap;      /* stay on one line on desktop */
+  white-space: nowrap;
 }
 
-@media (max-width: 900px) {
-  .form-left h1 {
-    white-space: normal;   /* allow wrapping on mobile */
-    font-size: 34px;
-  }
-}
-
-/* Paragraph */
 .form-left p {
-  font-family: "Montserrat", sans-serif;
   font-size: 15px;
   color: #333;
   margin-bottom: 30px;
   line-height: 1.6;
-  white-space: nowrap; /* allow wrapping */
+  white-space: normal;
 }
 
 /* Form Box */
 .form-box {
   max-width: 450px;
+  width: 100%;
 }
 
 /* Input Wrapper */
@@ -80,7 +74,6 @@ body {
   border-radius: 6px;
   border: 1px solid #28384F;
   font-size: 14px;
-  font-family: "Montserrat", sans-serif;
   outline: none;
 }
 
@@ -89,12 +82,9 @@ body {
   border-color: #4dbfb4;
 }
 
-/* Placeholder text styling */
 .form-group input::placeholder {
-  color: #333; /* same as input text */
+  color: #333;
   opacity: 1;
-  font-family: "Montserrat", sans-serif;
-  font-size: 14px;
 }
 
 /* Readonly */
@@ -109,7 +99,7 @@ body {
   gap: 6px;
 }
 
-/* Country code + flag box styled like input */
+/* Country code + flag box */
 .phone-code-box {
   display: flex;
   align-items: center;
@@ -122,7 +112,6 @@ body {
   border-radius: 6px;
   font-size: 14px;
   color: #333;
-  font-family: "Montserrat", sans-serif;
 
   height: 48px;
   min-width: 80px;
@@ -169,42 +158,35 @@ body {
   font-size: 12px;
   color: red;
   margin-top: 4px;
-  font-family: "Montserrat", sans-serif;
+}
+
+/* Datepicker */
+.datepicker-input {
+  width: 100%;
+  padding: 12px;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  font-size: 16px;
 }
 
 /* Right Image */
 .form-right img {
-  width: 115%;           /* increased size */
-  max-width: 700px;      /* bigger max width */
+  width: 115%;           /* keep your original desktop size */
+  max-width: 700px;      /* original max width */
   height: auto;
   display: block;
-  margin: 120px auto 0;  /* moved down more */
+  margin: 120px auto 0;  /* move down slightly like original */
   transform: translateY(20px);
 }
 
 /* Responsive adjustments */
-@media (max-width: 900px) {
-  .form-wrapper {
-    grid-template-columns: 1fr;
-    text-align: center;
-  }
 
-  .form-box {
-    margin: auto;
-  }
-
-  .form-right img {
-    width: 90%;
-    max-width: 100%;
-    margin: 20px auto 0;
-    transform: translateY(10px);
-  }
-}
-@media (min-width: 601px) and (max-width: 1024px) {
-
+/* Medium screens (tablet) */
+@media (max-width: 1024px) {
   .form-wrapper {
     grid-template-columns: 1fr;
     gap: 40px;
+    justify-items: start;  /* form left aligned */
   }
 
   .form-left h1 {
@@ -222,10 +204,10 @@ body {
     margin: 40px auto 0;
     transform: none;
   }
-
 }
-@media (max-width: 600px) {
 
+/* Small screens (mobile) */
+@media (max-width: 768px) {
   .form-container {
     padding: 30px 16px;
   }
@@ -233,16 +215,15 @@ body {
   .form-wrapper {
     grid-template-columns: 1fr;
     gap: 30px;
+    justify-items: start; /* keep form left aligned */
   }
 
   .form-left h1 {
     font-size: 28px;
-    white-space: normal; /* allow wrapping */
     line-height: 1.3;
   }
 
   .form-left p {
-    white-space: normal; /* allow wrapping */
     font-size: 14px;
   }
 
@@ -250,24 +231,65 @@ body {
     max-width: 100%;
   }
 
-  .form-right img {
-    width: 85%;
-    max-width: 100%;
-    margin: 20px auto 0;
-    transform: none;
-  }
-
   .phone-wrapper {
     flex-direction: column;
     align-items: stretch;
   }
 
-  .phone-code-box {
-    width: 100%;
-  }
-
+  .phone-code-box,
   .phone-input {
     width: 100%;
   }
 
+  .form-right img {
+    display: none; /* hide image on small screens */
+  }
+}
+
+/* Extra small screens */
+@media (max-width: 480px) {
+  .form-left h1 {
+    font-size: 26px;
+  }
+
+  .form-left p {
+    font-size: 13px;
+  }
+}
+/* Device-specific fixes */
+
+/* 1️⃣ ASUS Zenbook Fold: center form, hide image */
+@media (max-width: 840px) and (min-width: 720px) {
+  .form-wrapper {
+    justify-items: center; /* center the form */
+  }
+
+  .form-right img {
+    display: none; /* hide the image */
+  }
+}
+
+/* 2️⃣ Nest Hub 7" (~1024px width): adjust image in front of form */
+@media (max-width: 1050px) and (min-width: 950px) {
+  .form-wrapper {
+    grid-template-columns: 1fr 1fr; /* keep two columns */
+    gap: 40px;
+  }
+
+  .form-right img {
+    width: 95%; /* scale down to fit */
+    max-width: 500px;
+    margin-top: 30%; /* move up to align with form */
+    transform: none;
+  }
+}
+
+/* 3️⃣ Nest Hub Max (~1280px width): prevent image cut-off */
+@media (max-width: 1300px) and (min-width: 1201px) {
+  .form-right img {
+    width: 100%; /* take full available space */
+    max-width: 650px; /* increase max-width slightly */
+    margin-top: 20%; /* align with form */
+    transform: none;
+  }
 }

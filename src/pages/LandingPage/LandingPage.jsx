@@ -1,6 +1,6 @@
 import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import { trackPageView, trackEvent } from "../analytics/ga";
+import { trackPageView, trackEvent } from "../../analytics/ga";
 
 import "./LandingPage.css";
 

@@ -1,16 +1,11 @@
 import { useEffect } from "react";
-import { trackPageView, trackEvent } from "../analytics/ga";
+import { trackPageView, trackEvent } from "../../analytics/ga";
 import "./ThankYou.css";
 
 const ThankYou = () => {
   useEffect(() => {
     trackPageView("/thank-you");
     trackEvent("Reached Thank You Page");
-
-    document.body.style.overflow = "hidden";
-    return () => {
-      document.body.style.overflow = "auto";
-    };
   }, []);
 
   return (
@@ -20,7 +15,8 @@ const ThankYou = () => {
       </h1>
 
       <p className="thankyou-text">
-        We’ve received your details. Our support agent will contact you as per your shared availability.
+        We’ve received your details. Our support agent will contact you as per
+        your shared availability.
       </p>
 
       <h2 className="thankyou-subtitle">
