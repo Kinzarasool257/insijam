@@ -36,6 +36,7 @@ body {
   grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
   gap: 60px;
   align-items: start;
+   overflow: visible;
 }
 
 /* Main Heading */
@@ -64,6 +65,7 @@ body {
 /* Input Wrapper */
 .form-group {
   margin-bottom: 15px;
+  
 }
 
 /* Inputs */
@@ -85,6 +87,32 @@ body {
 .form-group input::placeholder {
   color: #333;
   opacity: 1;
+}
+/* Availability section */
+.availability-label {
+  display: block;
+  font-size: 14px;
+  font-weight: 600;
+  color: #28384f;
+  margin-bottom: 6px;
+}
+
+/* Row layout */
+.availability-row {
+  display: flex;
+  gap: 10px;
+}
+
+/* Each field */
+.availability-field {
+  flex: 1;
+}
+
+/* Mobile responsive */
+@media (max-width: 600px) {
+  .availability-row {
+    flex-direction: column;
+  }
 }
 
 /* Readonly */
@@ -160,15 +188,27 @@ body {
   margin-top: 4px;
 }
 
-/* Datepicker */
-.datepicker-input {
-  width: 100%;
-  padding: 12px;
-  border: 1px solid #ccc;
-  border-radius: 6px;
-  font-size: 16px;
+/* Make datepicker popper render on top */
+.react-datepicker-popper {
+  z-index: 1000 !important;
 }
 
+.datepicker-input {
+  width: 100%;
+  min-width: 0;
+  box-sizing: border-box;
+}
+.availability-field {
+  flex: 1;
+  position: relative;
+}
+
+/* Keep container responsive */
+.form-container {
+  overflow-x: visible; /* prevent cutting off date picker */
+}
+
+/* Optional: keep rest of your CSS responsive (as you already wrote) */
 /* Right Image */
 .form-right img {
   width: 115%;           /* keep your original desktop size */

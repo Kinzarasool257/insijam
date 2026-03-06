@@ -10,7 +10,8 @@ const FormPage = () => {
   const location = useLocation();
   const navigate = useNavigate();
 
-const [selectedDate, setSelectedDate] = useState(null);
+  const [selectedDate, setSelectedDate] = useState(null);
+const [selectedTime, setSelectedTime] = useState(null);
 
   const vehicleType = location.state?.vehicle || "";
 
@@ -45,8 +46,8 @@ const [selectedDate, setSelectedDate] = useState(null);
     const { name, value } = e.target;
 
     if (name === "phoneNumber") {
-  if (!/^\+?\d*$/.test(value)) return;
-}
+      if (!/^\+?\d*$/.test(value)) return;
+    }
 
     setFormData({ ...formData, [name]: value });
   };
@@ -83,16 +84,13 @@ const [selectedDate, setSelectedDate] = useState(null);
 
         {/* LEFT SIDE */}
         <div className="form-left">
-
           <h1>Compare Pakistan’s Top Takaful Providers</h1>
-
           <p>
             Find the most reliable coverage for yourself, your vehicle,
             or your family. Enter your details below to view tailored plans.
           </p>
 
           <div className="form-box">
-
             <form onSubmit={handleSubmit}>
 
               {/* Vehicle */}
@@ -113,9 +111,7 @@ const [selectedDate, setSelectedDate] = useState(null);
                   value={formData.name}
                   onChange={handleChange}
                 />
-                {errors.name && (
-                  <div className="error">{errors.name}</div>
-                )}
+                {errors.name && <div className="error">{errors.name}</div>}
               </div>
 
               {/* Email */}
@@ -126,87 +122,89 @@ const [selectedDate, setSelectedDate] = useState(null);
                   value={formData.email}
                   onChange={handleChange}
                 />
-                {errors.email && (
-                  <div className="error">{errors.email}</div>
+                {errors.email && <div className="error">{errors.email}</div>}
+              </div>
+
+              {/* Phone */}
+              <div className="form-group">
+                <div className="phone-wrapper">
+                  <div className="phone-code-box">
+                    <img src="/images/Flag.png" alt="PK" className="flag-icon" />
+                    <span>+92</span>
+                  </div>
+                  <input
+                    name="phoneNumber"
+                    placeholder="3001234567"
+                    value={formData.phoneNumber}
+                    onChange={handleChange}
+                    maxLength={10}
+                    className="phone-input"
+                  />
+                </div>
+                {errors.phoneNumber && (
+                  <div className="error">{errors.phoneNumber}</div>
                 )}
               </div>
 
-             {/* Phone */}
+            {/* Availability */}
 <div className="form-group">
+  <label className="availability-label">Your Availability</label>
 
-  <div className="phone-wrapper">
+  <div className="availability-row">
 
-    {/* Country Code */}
-    <div className="phone-code-box">
-      <img
-        src="/images/Flag.png"
-        alt="PK"
-        className="flag-icon"
-      />
-      <span>+92</span>
+    {/* Date */}
+    <div className="availability-field">
+      <DatePicker
+  selected={selectedDate}
+  onChange={(date) => {
+    setSelectedDate(date);
+    setFormData({ ...formData, bestDate: date });
+  }}
+  dateFormat="MMMM d, yyyy"
+  placeholderText="Select Date"
+  className="datepicker-input"
+  popperPlacement="bottom-start"
+/>
+      {errors.bestDate && <div className="error">{errors.bestDate}</div>}
     </div>
 
-    {/* Number Input */}
-<input
-  name="phoneNumber"
-  placeholder="3001234567"
-  value={formData.phoneNumber}  // keep only the user-entered number
-  onChange={handleChange}
-  maxLength={10}
-  className="phone-input"
+    {/* Time */}
+    <div className="availability-field">
+    <DatePicker
+  selected={selectedTime}
+  onChange={(time) => {
+    setSelectedTime(time);
+    setFormData({ ...formData, bestTime: time });
+  }}
+  showTimeSelect
+  showTimeSelectOnly
+  timeIntervals={15}
+  timeCaption="Time"
+  dateFormat="h:mm aa"
+  placeholderText="Select Time"
+  className="datepicker-input"
+  popperPlacement="bottom-start"
 />
+      {errors.bestTime && <div className="error">{errors.bestTime}</div>}
+    </div>
 
   </div>
-
-  {errors.phoneNumber && (
-    <div className="error">{errors.phoneNumber}</div>
-  )}
-
 </div>
 
-              {/* Time */}
-             <div className="form-group">
 
-  <DatePicker
-    selected={selectedDate}
-    onChange={(date) => {
-      setSelectedDate(date);
 
-      setFormData({
-        ...formData,
-        bestTime: date
-      });
-    }}
-
-    showTimeSelect
-    timeIntervals={15}
-    dateFormat="MMMM d, yyyy h:mm aa"
-    placeholderText="Choose your time"
-    className="datepicker-input"
-  />
-
-  {errors.bestTime && (
-    <div className="error">{errors.bestTime}</div>
-  )}
-
-</div>
-
-              {/* Button */}
+              {/* Submit Button */}
               <button type="submit" className="submit-btn">
                 Get a call back
               </button>
 
             </form>
-
           </div>
         </div>
 
         {/* RIGHT SIDE IMAGE */}
         <div className="form-right">
-          <img
-            src="images/formimage.png"
-            alt="Insurance Illustration"
-          />
+          <img src="images/formimage.png" alt="Insurance Illustration" />
         </div>
 
       </div>
