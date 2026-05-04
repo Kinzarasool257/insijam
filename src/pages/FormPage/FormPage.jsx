@@ -15,12 +15,12 @@ const FormPage = () => {
 
   const vehicleType = location.state?.vehicle || "";
 
+  // Initialize: if Auto/Car, leave blank for dropdown; otherwise pre-fill
   const [formData, setFormData] = useState({
-    vehicle: vehicleType,
+    vehicle: (vehicleType === "Auto" || vehicleType === "Car") ? "" : vehicleType,
     name: "",
     email: "",
     phoneNumber: "",
-    bestTime: "",
   });
 
   const [errors, setErrors] = useState({});
@@ -54,8 +54,8 @@ const FormPage = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    // Validation logic
     const newErrors = {};
+    if (!formData.vehicle) newErrors.vehicle = "Selection is required";
     if (!formData.name) newErrors.name = "Name is required";
     if (!formData.email || !validateEmail(formData.email))
       newErrors.email = "Valid email required";
@@ -66,37 +66,30 @@ const FormPage = () => {
     setErrors(newErrors);
     if (Object.keys(newErrors).length > 0) return;
 
-    // --- GOOGLE FORM SUBMISSION LOGIC ---
     const GOOGLE_FORM_URL = "https://docs.google.com/forms/d/e/1FAIpQLSdoWEuKL1EJyKwj7La6Iac9I1lwvh8sB1Xm32FAbebALK1A1Q/formResponse";
-
-    // Use URLSearchParams for maximum compatibility with Google Forms
     const params = new URLSearchParams();
     
-    // Mapping state to the Entry IDs you extracted
-    params.append("entry.1037011590", formData.vehicle);      // Takaful Type
+    // Mapping state to the Entry IDs
+    params.append("entry.1037011590", formData.vehicle);      // Takaful Type (Car, Bike, Health, or Travel)
     params.append("entry.1355950951", formData.name);         // Full Name
     params.append("entry.1054815149", formData.email);        // Email
     params.append("entry.1940347616", formData.phoneNumber);  // Phone
     
-    // Formatting Date
     if (selectedDate) {
-      const dateStr = selectedDate.toISOString().split('T')[0]; 
-      params.append("entry.2069882319", dateStr);             // Date
+      params.append("entry.2069882319", selectedDate.toISOString().split('T')[0]);
     }
 
-    // Formatting Time
     if (selectedTime) {
+      // Formats as 24h time for Google Sheets compatibility
       const timeStr = selectedTime.toLocaleTimeString('en-GB', { hour: '2-digit', minute: '2-digit' });
-      params.append("entry.1931685745", timeStr);             // Time
+      params.append("entry.1931685745", timeStr);
     }
 
     try {
       await fetch(GOOGLE_FORM_URL, {
         method: "POST",
-        mode: "no-cors", // Essential for bypassing CORS blocks
-        headers: {
-          "Content-Type": "application/x-www-form-urlencoded",
-        },
+        mode: "no-cors",
+        headers: { "Content-Type": "application/x-www-form-urlencoded" },
         body: params.toString(),
       });
 
@@ -104,7 +97,6 @@ const FormPage = () => {
       navigate("/thank-you"); 
     } catch (error) {
       console.error("Submission failed", error);
-      // Redirect to thank you page even if there is a CORS error, as data usually still sends
       navigate("/thank-you"); 
     }
   };
@@ -113,28 +105,37 @@ const FormPage = () => {
     <div className="form-container">
       <div className="form-wrapper">
 
-        {/* LEFT SIDE: Input Form */}
         <div className="form-left">
           <h1>Compare Pakistan’s Top Takaful Providers</h1>
-          <p>
-            Find the most reliable coverage for yourself, your vehicle,
-            or your family. Enter your details below to view tailored plans.
-          </p>
-
+          
           <div className="form-box">
             <form onSubmit={handleSubmit}>
 
-              {/* Vehicle Type (Auto-filled from selection) */}
-              <div className="form-group">
-                <input
-                  name="vehicle"
-                  value={formData.vehicle}
-                  readOnly
-                  className="readonly"
-                />
-              </div>
+              {/* Conditional Input: Dropdown for Auto journey, Read-only for others */}
+              {(vehicleType === "Auto" || vehicleType === "Car") ? (
+                <div className="form-group">
+                  <select 
+                    name="vehicle" 
+                    value={formData.vehicle} 
+                    onChange={handleChange}
+                  >
+                    <option value="">Select Vehicle Type</option>
+                    <option value="Car">Car</option>
+                    <option value="Bike">Bike</option>
+                  </select>
+                  {errors.vehicle && <div className="error">{errors.vehicle}</div>}
+                </div>
+              ) : (
+                <div className="form-group">
+                  <input
+                    name="vehicle"
+                    value={formData.vehicle}
+                    readOnly
+                    className="readonly"
+                  />
+                </div>
+              )}
 
-              {/* Full Name */}
               <div className="form-group">
                 <input
                   name="name"
@@ -145,7 +146,6 @@ const FormPage = () => {
                 {errors.name && <div className="error">{errors.name}</div>}
               </div>
 
-              {/* Email Address */}
               <div className="form-group">
                 <input
                   name="email"
@@ -156,11 +156,9 @@ const FormPage = () => {
                 {errors.email && <div className="error">{errors.email}</div>}
               </div>
 
-              {/* Phone Number */}
               <div className="form-group">
                 <div className="phone-wrapper">
                   <div className="phone-code-box">
-                    <img src="/images/Flag.png" alt="PK" className="flag-icon" />
                     <span>+92</span>
                   </div>
                   <input
@@ -177,9 +175,7 @@ const FormPage = () => {
                 )}
               </div>
 
-              {/* Availability Selectors */}
               <div className="form-group">
-                <label className="availability-label">Your Availability</label>
                 <div className="availability-row">
                   <div className="availability-field">
                     <DatePicker
@@ -191,6 +187,7 @@ const FormPage = () => {
                     />
                   </div>
                   <div className="availability-field">
+                    {/* FIXED TIME PICKER */}
                     <DatePicker
                       selected={selectedTime}
                       onChange={(time) => setSelectedTime(time)}
@@ -215,7 +212,6 @@ const FormPage = () => {
           </div>
         </div>
 
-        {/* RIGHT SIDE: Visual/Illustration */}
         <div className="form-right">
           <img src="images/formimage.png" alt="Insurance Illustration" />
         </div>
