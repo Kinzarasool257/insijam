@@ -333,3 +333,41 @@ body {
     transform: none;
   }
 }
+.vehicle-selection-area {
+  margin-bottom: 20px;
+  text-align: left;
+}
+
+.selection-title {
+  font-weight: 600;
+  font-size: 14px;
+  color: #2d3e50;
+  margin-bottom: 8px;
+}
+
+.radio-options {
+  display: flex;
+  gap: 30px;
+}
+
+.radio-card {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  cursor: pointer;
+  font-size: 14px;
+  color: #4a5568;
+}
+
+.radio-card input[type="radio"] {
+  accent-color: #4fd1c5; /* Matches your teal theme */
+  width: 18px;
+  height: 18px;
+}
+
+.error-text {
+  color: #e53e3e;
+  font-size: 12px;
+  margin-top: 4px;
+  display: block;
+}
